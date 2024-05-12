@@ -1,12 +1,6 @@
 import { Pizza } from "../features/menu/MenuItem";
-
-type Order = {
-  // Define the properties of an order here
-  // For example:
-  // id: number;
-  // name: string;
-  // price: number;
-};
+import { CreatedOrder } from "../features/order/CreateOrder";
+import { Order } from "../features/order/Order";
 
 export const isPizza = (item: unknown): item is Pizza => {
   return (
@@ -42,7 +36,7 @@ export async function getMenu() {
   return data;
 }
 
-export async function getOrder(id: string): Promise<any> {
+export async function getOrder(id: string): Promise<Order> {
   const res = await fetch(`${API_URL}/order/${id}`);
   if (!res.ok) throw Error(`Couldn't find order #${id}`);
 
@@ -50,7 +44,7 @@ export async function getOrder(id: string): Promise<any> {
   return data;
 }
 
-export async function createOrder(newOrder: Order): Promise<any> {
+export async function createOrder(newOrder: CreatedOrder): Promise<Order> {
   try {
     const res = await fetch(`${API_URL}/order`, {
       method: "POST",
