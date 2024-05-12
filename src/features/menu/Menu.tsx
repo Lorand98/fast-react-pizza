@@ -1,20 +1,20 @@
 import { useLoaderData } from "react-router-dom";
 import { getMenu } from "../../services/apiRestaurant";
-import MenuItem from "./MenuItem";
+import MenuItem, { Pizza } from "./MenuItem";
 
 function Menu() {
-  const menu = useLoaderData() as Awaited<ReturnType<typeof menuLoader>>;
+  const menu = useLoaderData() as Awaited<ReturnType<typeof loader>>;
 
   return (
     <ul>
-      {menu.map((menuItem) => (
+      {menu.map((menuItem: Pizza) => (
         <MenuItem key={menuItem.id} pizza={menuItem} />
       ))}
     </ul>
   );
 }
 
-export const menuLoader = async () => {
+export const loader = async () => {
   const menu = await getMenu();
   return menu;
 };
